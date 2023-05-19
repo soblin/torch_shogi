@@ -1,7 +1,13 @@
+import glob
+import os
+import sys
+from argparse import ArgumentParser
+
 import cshogi
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from sklearn.model_selection import train_test_split
 
 MOVE_DIRECTION = [
     UP,
@@ -206,7 +212,7 @@ class PolicyValueNetwork(nn.Module):
         return policy, value
 
 
-def main():
+def main(argv):
     board = cshogi.Board()
     batch_size = 10
     torch_features = torch.empty(
@@ -216,6 +222,18 @@ def main():
     set_board_features(board, features)
     print(features[14])
 
+    parser = ArgumentParser()
+    parser.add_argument("csa_dir")
+    parser.add_argument("--test_ratio", type=float, default=0.1)
+    args = parser.parse_args()
+    csa_file_list = glob.glob(
+        os.path.join(args.csa_dir, "**", "*.csa"), recursive=True
+    )
+    files_train, files_test = train_test_split(
+        csa_file_list, test_size=args.test_ratio
+    )
+    print(len(files_train), len(files_test))
+
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)

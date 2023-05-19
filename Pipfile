@@ -11,6 +11,7 @@ cshogi = "*"
 numpy = "*"
 scipy = "*"
 matplotlib = "*"
+scikit-learn = "*"
 
 [dev-packages]
 
