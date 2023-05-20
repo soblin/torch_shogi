@@ -12,6 +12,7 @@ numpy = "*"
 scipy = "*"
 matplotlib = "*"
 scikit-learn = "*"
+nvidia-cudnn-cu11 = "*"
 
 [dev-packages]
 
