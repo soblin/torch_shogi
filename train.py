@@ -212,11 +212,11 @@ def main():
         # 各エポックで保存する
         if args.checkpoint:
             save_checkpoint(
+                args.checkpoint.format(**{"epoch": epoch, "step": t}),
                 epoch,
                 t,
                 model.state_dict(),
                 optimizer.state_dict(),
-                args.checkpoint.format(**{"epoch": epoch, "step": t}),
             )
 
 

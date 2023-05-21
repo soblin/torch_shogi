@@ -68,7 +68,7 @@ class PolicyValueNetwork(nn.Module):
             bias=False,
         )
         self.value_norm1 = nn.BatchNorm2d(MOVE_PLANES_NUM)
-        self.value_fc1 = nn.Linear(MOVE_PLANES_NUM, fcl)
+        self.value_fc1 = nn.Linear(MOVE_LABELS_NUM, fcl)
         self.value_fc2 = nn.Linear(fcl, 1)
 
     def forward(self, x):
